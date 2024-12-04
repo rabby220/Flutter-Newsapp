@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -8,6 +7,7 @@ import 'package:newsapp/app/utils/app_icons.dart';
 import 'package:newsapp/app/utils/app_text.dart';
 
 import '../../../utils/loading_indicator.dart';
+import 'latest_news_screen.dart';
 
 class LatestNewsView extends GetView<LatestNewsController> {
   const LatestNewsView({super.key});
@@ -99,34 +99,7 @@ Widget _buildLatestNewsData({
             itemCount: controller.latestNewsList.length,
             itemBuilder: (_, index) {
               final data = controller.latestNewsList[index];
-              return GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return Container(
-                        color: Colors.red,
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        width: MediaQuery.of(context).size.width,
-                      );
-                    },
-                  );
-                },
-                child: ListTile(
-                  subtitle: Text(
-                    data.title.toString(),
-                    style: AppText.headLineStyle,
-                  ),
-                  title: CachedNetworkImage(
-                    errorWidget: (context, url, error) => Image.asset(
-                      AppText.imageNotAvailableText,
-                      fit: BoxFit.cover,
-                    ),
-                    placeholder: (context, url) => buildLoadingIndicator(),
-                    imageUrl: data.image == "None" ? '' : data.image.toString(),
-                  ),
-                ),
-              );
+              return LatestNewsScreen(latestNewsModel: data);
             },
             separatorBuilder: (BuildContext context, int index) {
               return Divider(
