@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:newsapp/app/data/constant/constant.dart';
 import 'package:newsapp/app/data/models/latestNewsModel.dart';
 
 class LatestNewsController extends GetxController {
+  TextEditingController searchController = TextEditingController();
   List<LatestNewsModel> latestNewsList = [];
 
   Future<List<LatestNewsModel>> fetchLatestNews() async {

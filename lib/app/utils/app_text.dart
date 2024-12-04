@@ -8,4 +8,9 @@ class AppText {
     fontSize: 25.0,
     color: AppColors.blackColor,
   );
+
+  static String appBarText = "Latest News";
+  static String searchBoxText = "Search News";
+  static String searchButtonText = "Search";
+  static String cancelButtonText = "Cancel";
 }
