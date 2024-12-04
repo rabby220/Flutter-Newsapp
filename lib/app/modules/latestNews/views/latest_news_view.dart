@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,8 @@ class LatestNewsView extends GetView<LatestNewsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 90.0,
+        backgroundColor: AppColors.purpleColor,
         title: Text(AppText.appBarText),
         centerTitle: true,
         actions: [
@@ -66,11 +69,12 @@ class LatestNewsView extends GetView<LatestNewsController> {
           ),
         ],
       ),
-      // body: _buildLatestNewsData(context: context, controller: controller),
+      body: _buildLatestNewsData(context: context, controller: controller),
     );
   }
 }
 
+//this is a action button when user can search any articles or can cancel search box
 Widget _buildAlertActionButton(
     {required String text, required VoidCallback onPressed, Color? color}) {
   return MaterialButton(
@@ -80,25 +84,59 @@ Widget _buildAlertActionButton(
   );
 }
 
+//This is widget of fetch data from api show will latest news data...
 Widget _buildLatestNewsData({
   required LatestNewsController controller,
   required BuildContext context,
 }) {
-  return FutureBuilder(
-    future: controller.fetchLatestNews(),
-    builder: (_, snapshot) {
-      if (snapshot.hasData) {
-        return ListView.builder(
-          itemCount: controller.latestNewsList.length,
-          itemBuilder: (_, index) {
-            final data = controller.latestNewsList[index];
-            return ListTile(
-              title: Text(data!.title!.toString()),
-            );
-          },
-        );
-      }
-      return buildLoadingIndicator();
-    },
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: FutureBuilder(
+      future: controller.fetchLatestNews(),
+      builder: (_, snapshot) {
+        if (snapshot.hasData) {
+          return ListView.separated(
+            itemCount: controller.latestNewsList.length,
+            itemBuilder: (_, index) {
+              final data = controller.latestNewsList[index];
+              return GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Container(
+                        color: Colors.red,
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        width: MediaQuery.of(context).size.width,
+                      );
+                    },
+                  );
+                },
+                child: ListTile(
+                  subtitle: Text(
+                    data.title.toString(),
+                    style: AppText.headLineStyle,
+                  ),
+                  title: CachedNetworkImage(
+                    errorWidget: (context, url, error) => Image.asset(
+                      AppText.imageNotAvailableText,
+                      fit: BoxFit.cover,
+                    ),
+                    placeholder: (context, url) => buildLoadingIndicator(),
+                    imageUrl: data.image == "None" ? '' : data.image.toString(),
+                  ),
+                ),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return Divider(
+                color: Colors.black,
+              );
+            },
+          );
+        }
+        return buildLoadingIndicator();
+      },
+    ),
   );
 }
