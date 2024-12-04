@@ -7,7 +7,8 @@ import 'package:newsapp/app/data/constant/constant.dart';
 import 'package:newsapp/app/data/models/latestNewsModel.dart';
 
 class LatestNewsController extends GetxController {
-  TextEditingController searchController = TextEditingController();
+  //search controller
+  final TextEditingController searchController = TextEditingController();
   List<LatestNewsModel> latestNewsList = [];
 
   Future<List<LatestNewsModel>> fetchLatestNews() async {
