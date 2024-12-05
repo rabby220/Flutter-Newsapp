@@ -6,3 +6,6 @@ const String baseUrl = "https://api.currentsapi.services/v1/";
 
 //Latest News Url
 const String latestNewsUrl = "${baseUrl}latest-news?language=en&apiKey=$apiKey";
+
+//
+const String searchUrl = "${baseUrl}search?language=en&keywords=";

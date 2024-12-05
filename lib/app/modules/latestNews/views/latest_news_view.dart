@@ -79,6 +79,7 @@ Future<void> _buildDialogBox({
             text: AppText.cancelButtonText,
             onPressed: () {
               Navigator.pop(context);
+              controller.searchController.clear();
             },
           ),
         ],
@@ -101,8 +102,8 @@ Widget _buildAlertActionButton({
 }) {
   return MaterialButton(
     onPressed: onPressed,
-    child: Text(text),
     color: color,
+    child: Text(text),
   );
 }
 

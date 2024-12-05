@@ -1,4 +1,33 @@
-class LatestNewsModel {
+class SearchNewsModel {
+  String? status;
+  List<News>? news;
+  int? page;
+
+  SearchNewsModel({this.status, this.news, this.page});
+
+  SearchNewsModel.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    if (json['news'] != null) {
+      news = <News>[];
+      json['news'].forEach((v) {
+        news!.add(News.fromJson(v));
+      });
+    }
+    page = json['page'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    if (news != null) {
+      data['news'] = news!.map((v) => v.toJson()).toList();
+    }
+    data['page'] = page;
+    return data;
+  }
+}
+
+class News {
   String? id;
   String? title;
   String? description;
@@ -9,7 +38,7 @@ class LatestNewsModel {
   List<String>? category;
   String? published;
 
-  LatestNewsModel(
+  News(
       {this.id,
       this.title,
       this.description,
@@ -20,7 +49,7 @@ class LatestNewsModel {
       this.category,
       this.published});
 
-  LatestNewsModel.fromJson(Map<String, dynamic> json) {
+  News.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     description = json['description'];
