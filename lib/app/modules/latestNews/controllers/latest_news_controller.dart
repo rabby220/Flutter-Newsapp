@@ -9,6 +9,8 @@ import 'package:newsapp/app/data/models/latestNewsModel.dart';
 class LatestNewsController extends GetxController {
   //search controller
   final TextEditingController searchController = TextEditingController();
+
+  //.......................................................................
   List<LatestNewsModel> latestNewsList = [];
 
   Future<List<LatestNewsModel>> fetchLatestNews() async {
@@ -26,7 +28,8 @@ class LatestNewsController extends GetxController {
         return [];
       }
     } catch (e) {
-      throw Exception('');
+      throw Exception(
+          'Unable to fetch the latest news. Please check your internet connection.');
     }
   }
 }

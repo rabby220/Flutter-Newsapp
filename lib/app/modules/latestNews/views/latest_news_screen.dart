@@ -25,7 +25,9 @@ class LatestNewsScreen extends GetView {
           style: AppText.headlinesTextStyle,
           textAlign: TextAlign.justify,
         ),
-        title: _buildImageWidget(latestNewsModel: latestNewsModel),
+        title: _buildImageWidget(
+          latestNewsModel: latestNewsModel,
+        ),
       ),
     );
   }
@@ -38,5 +40,7 @@ class LatestNewsScreen extends GetView {
 Widget _buildImageWidget({
   required LatestNewsModel latestNewsModel,
 }) {
-  return buildCachedImageWidget(latestNewsModel: latestNewsModel);
+  return buildCachedImageWidget(
+    latestNewsModel: latestNewsModel,
+  );
 }

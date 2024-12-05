@@ -3,6 +3,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:newsapp/app/utils/app_colors.dart';
 
 class AppText {
+  static TextStyle appBarTextStyle = GoogleFonts.aBeeZee(
+    fontSize: 22.0,
+    fontWeight: FontWeight.w500,
+    color: AppColors.blackColor,
+  );
+
+  static TextStyle searchBoxTextStyle = GoogleFonts.acme(
+    fontSize: 18.0,
+    color: AppColors.blueColor,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 1,
+  );
+
   static TextStyle headlinesTextStyle = GoogleFonts.merriweather(
     fontSize: 22.0,
     fontWeight: FontWeight.w700,

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,12 +7,10 @@ import '../../../data/constant/constant.dart';
 import '../../../data/models/latestNewsModel.dart';
 
 class SearchBarController extends GetxController {
-  final TextEditingController searchTextEditingController =
-      TextEditingController();
-
   List<LatestNewsModel> searchNewsList = [];
   Future<List<LatestNewsModel>> searchNewsData(
       {required String searchQuery}) async {
+    searchNewsList.clear(); // Clear the list before fetching new data
     final String url = "$searchUrl$searchQuery&apiKey=$apiKey";
 
     try {
@@ -30,7 +27,7 @@ class SearchBarController extends GetxController {
         return [];
       }
     } catch (e) {
-      throw Exception('');
+      throw Exception('Search data not found : error: ${e.toString()}');
     }
   }
 }

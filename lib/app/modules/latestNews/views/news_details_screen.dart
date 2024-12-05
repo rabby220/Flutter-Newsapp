@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:newsapp/app/data/models/latestNewsModel.dart';
+import 'package:newsapp/app/utils/app_colors.dart';
+import 'package:newsapp/app/utils/app_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../utils/app_text.dart';
 import '../../../widgets/appbar.dart';
 import '../../../widgets/cacheImage.dart';
+import '../../../widgets/iconButton.dart';
 
 class NewsDetailsScreen extends GetView {
   final LatestNewsModel latestNewsModel;
@@ -16,12 +19,17 @@ class NewsDetailsScreen extends GetView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //................................................................
-      //................................................................
-      appBar: buildAppBarWidget(appBarText: '', backgroundColor: Colors.red),
-
-      //............................................................................
-      //............................................................................
+      appBar: buildAppBarWidget(
+        appBarText: 'Latest News details',
+        backgroundColor: AppColors.greenColor,
+        leadingWidget: IconButtonWidget(
+          onPressed: () {
+            Get.back();
+          },
+          icon: AppIcons.arrowBackIcon,
+          tooltip: 'Back',
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: SizedBox(
@@ -73,7 +81,7 @@ class NewsDetailsScreen extends GetView {
                     if (await canLaunchUrl(url)) {
                       await launchUrl(
                         url,
-                        mode: LaunchMode.inAppWebView,
+                        mode: LaunchMode.inAppBrowserView,
                       );
                     } else {
                       throw 'Could not launch ';
