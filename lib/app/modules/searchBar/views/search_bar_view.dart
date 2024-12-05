@@ -33,14 +33,13 @@ Widget _buildSearchNews({
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: FutureBuilder(
-      future: controller.searchNewsData(
-          searchQuery: 'Flutter Mobile Application Development'),
+      future: controller.searchNewsData(searchQuery: 'Apple macbook'),
       builder: (_, snapshot) {
         if (snapshot.hasData) {
           return ListView.separated(
-            itemCount: controller.SearchNewsList.length,
+            itemCount: controller.searchNewsList.length,
             itemBuilder: (_, index) {
-              final searchNewsModel = controller.SearchNewsList[index];
+              final searchNewsModel = controller.searchNewsList[index];
               return SearchResultView(searchNewsModel: searchNewsModel);
             },
             separatorBuilder: (BuildContext context, int index) {

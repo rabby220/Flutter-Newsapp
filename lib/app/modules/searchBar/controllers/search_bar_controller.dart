@@ -5,14 +5,15 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../data/constant/constant.dart';
-import '../../../data/models/searchNewsModel.dart';
+import '../../../data/models/latestNewsModel.dart';
 
 class SearchBarController extends GetxController {
   final TextEditingController searchTextEditingController =
       TextEditingController();
 
-  List<News> SearchNewsList = [];
-  Future<List<News>> searchNewsData({required String searchQuery}) async {
+  List<LatestNewsModel> searchNewsList = [];
+  Future<List<LatestNewsModel>> searchNewsData(
+      {required String searchQuery}) async {
     final String url = "$searchUrl$searchQuery&apiKey=$apiKey";
 
     try {
@@ -21,10 +22,10 @@ class SearchBarController extends GetxController {
         Map<String, dynamic> body = jsonDecode(response.body);
         List<dynamic> list = body['news'];
         for (var element in list) {
-          News searchNewsModel = News.fromJson(element);
-          SearchNewsList.add(searchNewsModel);
+          LatestNewsModel searchNewsModel = LatestNewsModel.fromJson(element);
+          searchNewsList.add(searchNewsModel);
         }
-        return SearchNewsList;
+        return searchNewsList;
       } else {
         return [];
       }
